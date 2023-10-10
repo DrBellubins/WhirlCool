@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2ssaq3b2u0ih"]
+
+[ext_resource type="Script" path="res://Scripts/Physics/HoverCarSystem.cs" id="1_h686g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dnr3q"]
+size = Vector3(0.25, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6csjt"]
+size = Vector3(2, 0.25, 1)
+
+[node name="HoverCar" type="RigidBody3D" node_paths=PackedStringArray("HoverRays")]
+script = ExtResource("1_h686g")
+HoverRays = [NodePath("FrontRight"), NodePath("FrontLeft"), NodePath("BackRight"), NodePath("BackLeft")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_dnr3q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_6csjt")
+
+[node name="FrontRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0.5)
+
+[node name="FrontLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.5)
+
+[node name="BackRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0.5)
+
+[node name="BackLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -0.5)
