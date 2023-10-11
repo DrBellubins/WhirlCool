@@ -21,8 +21,6 @@ public partial class GravityTest : RigidBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		
-
 		ApplyForce(gravityDir);
 
 		if (Input.IsActionJustPressed("interact"))

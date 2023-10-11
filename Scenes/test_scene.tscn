@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://crb5vd62phv3r"]
+[gd_scene load_steps=4 format=3 uid="uid://crb5vd62phv3r"]
 
 [ext_resource type="Script" path="res://Scripts/hotkeys.gd" id="1_bmjll"]
-[ext_resource type="Script" path="res://Scripts/Physics/GravityTest.cs" id="2_o3u8p"]
+[ext_resource type="PackedScene" uid="uid://d2ssaq3b2u0ih" path="res://Prefabs/HoverCar.tscn" id="2_kr7m4"]
 
 [sub_resource type="Curve3D" id="Curve3D_hnkwn"]
 bake_interval = 0.1
@@ -11,13 +11,6 @@ _data = {
 }
 point_count = 12
 up_vector_enabled = false
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nr64m"]
-bounce = 0.9
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_7n6vh"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_bf0en"]
 
 [node name="TestScene" type="Node3D"]
 script = ExtResource("1_bmjll")
@@ -40,22 +33,10 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0969, 1.16178, 5.41008)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." node_paths=PackedStringArray("Track")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0969, 1.85214, -0.0316148)
-physics_material_override = SubResource("PhysicsMaterial_nr64m")
-gravity_scale = 0.0
-script = ExtResource("2_o3u8p")
-Track = NodePath("../Path3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_7n6vh")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_bf0en")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.673309, -0.522049, 0.523564, 0, 0.70813, 0.706082, -0.739361, -0.475411, 0.476791, 0, 0, 0)
 shadow_enabled = true
+
+[node name="HoverCar" parent="." node_paths=PackedStringArray("Track") instance=ExtResource("2_kr7m4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.3766, 1.85931, -0.293631)
+Track = NodePath("../Path3D")
